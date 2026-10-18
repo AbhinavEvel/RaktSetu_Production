@@ -1,0 +1,27 @@
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
+
+# Java / Maven
+target/
+*.jar
+
+# Node / React
+node_modules/
+dist/
+
+# Local configuration
+backend/src/main/resources/application.properties
+
+# Logs and crash dumps
+*.log
+hs_err_pid*.log
+
+# IDE files
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
