@@ -1,14 +1,14 @@
-import axios from 'axios';
+﻿import axios from 'axios';
 
-// Ek centralized Axios instance — poori app isi ko use karegi
+// Ek centralized Axios instance â€” poori app isi ko use karegi
 const api = axios.create({
-    baseURL: 'http://localhost:8080/api',   // Spring Boot backend ka base URL
+    baseURL: import.meta.env.VITE_API_BASE_URL || 'http://localhost:8080/api',   // Spring Boot backend ka base URL
     headers: {
         'Content-Type': 'application/json',
     },
 });
 
-// REQUEST INTERCEPTOR — har request jaane se pehle chalta hai
+// REQUEST INTERCEPTOR â€” har request jaane se pehle chalta hai
 api.interceptors.request.use(
     (config) => {
         const token = localStorage.getItem('token');   // Login ke baad save kiya hua JWT
@@ -24,14 +24,14 @@ api.interceptors.request.use(
     }
 );
 
-// RESPONSE INTERCEPTOR — har response aane ke baad chalta hai
+// RESPONSE INTERCEPTOR â€” har response aane ke baad chalta hai
 api.interceptors.response.use(
     (response) => {
         return response;   // Sahi response ho toh kuch mat karo, aage bhej do
     },
     (error) => {
         if (error.response && error.response.status === 401) {
-            // Token expire/invalid — user ko logout karke login page pe bhejo
+            // Token expire/invalid â€” user ko logout karke login page pe bhejo
             localStorage.removeItem('token');
             localStorage.removeItem('role');
             window.location.href = '/login';
